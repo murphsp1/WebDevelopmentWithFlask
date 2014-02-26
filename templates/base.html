@@ -9,10 +9,12 @@
 {% endblock %}
 #}
 
+{#
 {% block scripts %}
 {{ super() }}
 {{ moment.include_moment() }}
 {% endblock %}
+#}
 
 {% block navbar %}
 <div class = "navbar nav-bar-inverse" role="navigation">
@@ -39,7 +41,7 @@
 <div class="container" > 
 	{% for message in get_flashed_messages() %} 
 	<div class="alert alert-warning" > 
-		<button type="button" class="close" data-dismiss="alert" >&times; </button> {{ message }} 
+		<button type="button" class="close" data-dismiss="alert" >&times;</button> {{ message }} 
 	</div> 
 	{% endfor %}
 

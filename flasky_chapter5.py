@@ -1,15 +1,30 @@
-from flask import Flask
+from flask import Flask, render_template, session
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.wtf import Form 
+from wtforms import StringField, SubmitField
+from wtforms.validators import Required
+from flask.ext.bootstrap import Bootstrap
+from flask.ext.moment import Moment
+from flask.ext.script import Manager, Shell
+#from datetime import datetime
+from flask.ext.migrate import Migrate, MigrateCommand
+
 import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'hard to get and guess string'
+#this should really be stored as an environment variable
+
 app.config['SQLALCHEMY_DATABASE_URI'] =  'sqlite:///' + os.path.join(basedir,'data.sqlite')
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 
-
+manager = Manager(app)
+moment = Moment(app)
+bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 
 class Role(db.Model):
@@ -31,6 +46,25 @@ class User(db.Model):
 		return '<User %r>' % self.username
 
 
+class NameForm(Form):
+	name = StringField('What is your name?', validators = [Required()])
+	submit = SubmitField('Submit')
+
+def make_shell_context():
+	return dict(app=app, db=db, User=User, Role=Role)
+
+manager.add_command("shell", Shell(make_context = make_shell_context))
+manager.add_command('db', MigrateCommand)
+
+#routes and view functions
+@app.errorhandler(404)
+def page_not_found(e):
+	return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def internal_server_error(e):
+	return render_template('500.html'), 500
+
 @app.route('/', methods = ['GET','POST'])
 def index():
 	form = NameForm()
@@ -50,6 +84,5 @@ def index():
 		known = session.get('known',False))
 
 
-
 if __name__ == '__main__':
-	app.run(debug=True)
+	manager.run()
