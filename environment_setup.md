@@ -34,3 +34,9 @@ The app.config dictionary is a general purpose dictionary to store config data f
 
 ## SQLAlchemy
 Changes are stored in a db session that must be committed before anything happens in the DB. It is a local Python cache of everything that must change in the DB
+
+## Flask.Mail
+
+(venv) $ export MAIL_USERNAME = < Gmmail username > 
+(venv) $ export MAIL_PASSWORD = < Gmail password >
+
