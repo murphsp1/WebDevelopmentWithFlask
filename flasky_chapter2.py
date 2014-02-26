@@ -1,13 +1,17 @@
 from flask import Flask, render_template
 from flask.ext.bootstrap import Bootstrap
+from flask.ext.moment import Moment
+from datetime import datetime
 
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
+moment = Moment(app)
 
 
 @app.route('/index')
 def index():
-	return render_template('index.html')
+	return render_template('index.html', current_time = datetime.utcnow())
+
 
 @app.route('/user/<name>')
 def user(name):
@@ -21,7 +25,7 @@ def page_not_found(e):
 def internal_server_error(e):
 	return render_template('500.html'), 500
 
-	
+
 
 
 if __name__ == '__main__':
