@@ -1,0 +1,1 @@
+This repo is going to walk through the first 8 chapters of the WebDevelopment with Flask book .. my goal for 2/26/2014.
