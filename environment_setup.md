@@ -31,3 +31,6 @@ Request hooks - register functions to always run at certain points in the reques
 - teardown_request - run after each request regardless of unhandled exceptions
 
 The app.config dictionary is a general purpose dictionary to store config data for the app and its extensions.
+
+## SQLAlchemy
+Changes are stored in a db session that must be committed before anything happens in the DB. It is a local Python cache of everything that must change in the DB
