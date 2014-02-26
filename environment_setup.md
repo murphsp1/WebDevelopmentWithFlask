@@ -29,3 +29,5 @@ Request hooks - register functions to always run at certain points in the reques
 - before_request - run before each request (maybe a database connection)
 - after_request - run after each request, if no unhandled exceptions occur
 - teardown_request - run after each request regardless of unhandled exceptions
+
+The app.config dictionary is a general purpose dictionary to store config data for the app and its extensions.
