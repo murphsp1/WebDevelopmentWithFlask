@@ -39,4 +39,4 @@ Changes are stored in a db session that must be committed before anything happen
 
 (venv) $ export MAIL_USERNAME = < Gmmail username > 
 (venv) $ export MAIL_PASSWORD = < Gmail password >
-
+(venv) $ export FLASKY_ADMIN = < your-email-address >
