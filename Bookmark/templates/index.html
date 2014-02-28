@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+ 
+{% block title %}Bookmarks{% endblock %}
+ 
+{% block content_title %}Bookmarks{% endblock %}
+ 
+{% block content %}
+  <ul>
+    {% for bookmark in object_list %}
+    <li><a href="{{ bookmark.url }}">{{ bookmark.url }}</a>
+      <a href="{{ url_for('bookmarks.delete', pk=bookmark.id) }}"><img src="{{ url_for('static', filename='img/delete.png') }}" /></a>
+    </li>
+    {% endfor %}
+  </ul>
+ 
+  {% include "includes/pagination.html" %}
+{% endblock %}

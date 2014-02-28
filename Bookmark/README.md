@@ -1,0 +1,1 @@
+This project was borrowed from someone's blog but I decided not to put the time in to fix the import statements that were broken. It would appear that this project heavily uses the peewee ORM which I would prefer not to be distracted by at this point.
