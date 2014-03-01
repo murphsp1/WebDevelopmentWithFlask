@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+
+{% block page_content %} 
+	<h1>Tweets for {{ screen_name }} </h1>
+	<p>This should just dump the user variable to screen as text since it is JSON</p>
+	<ul>
+	{% for tweet in tweets %}
+		<li> 
+			{{ tweet['text'] }}
+		</li>
+	{% endfor %}
+	</ul>
+
+{% endblock %}
+
