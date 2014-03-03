@@ -1,8 +1,10 @@
 from flask import render_template, redirect, request, url_for, flash
-from flask.ext.login import login_user, logout_user, login_required
+from flask.ext.login import login_user, logout_user, login_required, current_user
 from . import auth
+from .. import db
 from ..models import User
-from .forms import LoginForm
+from ..email import send_email
+from .forms import LoginForm, RegistrationForm
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -34,11 +36,11 @@ def register():
         db.session.add(user)
         db.session.commit()
         token = user.generate_confirmation_token()
-        send_email('auth/email/confirm',
-                'Confirm Your Account', user, token=token)
+        send_email(user.email, 'Confirm Your Account',
+                   'auth/email/confirm', user=user, token=token)
 
         flash('A confirmation email has been sent to you by email')
-        return redirect(url_for('main.index'))
+        return redirect(url_for('auth.login'))
     return render_template('auth/register.html', form = form)
 
 
@@ -59,7 +61,7 @@ def confirm(token):
 @login_required
 def resend_confirmation():
     token = current_user.generate_confirmation_token()
-    send_email('auth/email/confirm', 'Confirm Your Account', user, token=token)
+    send_email('auth/email/confirm', 'Confirm Your Account', user = user, token=token)
     flash('A new confirmation email has been sent to you by email')
     return redirect(url_for('main.index'))
 
@@ -76,3 +78,4 @@ def unconfirmed():
         return redirect('main.index')
 
     return render_template('auth/unconfirmed.html')
+
