@@ -1,0 +1,11 @@
+Dear {{ user.email }}, 
+
+Welcome to a test web site! To confirm your email address that we hope you submitted, please click on the following link: 
+
+{{ url_for(' auth.confirm', token = token, _external = True) }} 
+
+Sincerely, 
+Captain Awesome
+
+Note: replies to this email address are not monitored.
+
