@@ -1,0 +1,33 @@
+{% extends "base_slate.html" %}
+
+{% block title %}SR{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>Hello World!</h1>
+</div>
+<div class="container-fluid">
+    <div class="col-md-3">
+      <div class="well sidebar-nav">
+        <ul class="nav nav-list">
+          <li class="nav-header">Twitter</li>
+          <li class="active"><a href="#">Flagged Update Feed</a></li>
+          <li><a href="#">Flagged Employee Feed</a></li>
+          <li><a href="#">Full Feed</a></li>
+          <li><a href="#">Archived Updates</a></li>
+          <li class="nav-header">Administration</li>
+          <li><a href="#">Add/Remove Employees</a></li>
+          <li><a href="#">Manage Users</a></li>
+          <li><a href="#">Manage Billing</a></li>
+        </ul>
+      </div><!--/.well -->
+    </div><!--/span-->
+    <div class="col-md-9">
+    	<h2>Main Content Region</h2>
+    	{% block page_content_inner %}
+    	{% endblock page_content_inner %}
+     
+    </div>
+</div>
+
+{% endblock %}
